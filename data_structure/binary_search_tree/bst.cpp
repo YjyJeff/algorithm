@@ -57,6 +57,20 @@ Node* findMinimum(Node* node){
   return node;
 }
 
+Node* searchKey(Node* root, const int key){
+  if(root != nullptr){
+    if(key > root->key_)
+      return searchKey(root->right_child_, key);
+    else
+      if(key < root->key_)
+        return searchKey(root->left_child_, key);
+      else
+        return root;
+  }
+  cout << "The key does not exist int Tree"<< endl;
+  return nullptr;
+}
+
 Tree::Tree(){
   root_ = nullptr;
 }
@@ -91,7 +105,8 @@ void Tree::treeInsertion(const int key){
 
 bool Tree::treeDelete(const int key){
   //deleteNode(T, node);
-  Node* node = Tree::treeSearchKey(key);
+  //Node* node = Tree::treeSearchKey(key);
+  Node* node = searchKey(this->root_,key);
   if(node == nullptr)
     return false;
   else{
