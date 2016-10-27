@@ -1,0 +1,7 @@
+* Binary tree delete node
+** Three cases 
+*** if node's left child is null, transplant(node, node.right_child).
+*** if node's right child is null, transplant(node, node.left_child).
+*** node has two kids, min = findMinimum(node.right)
+**** if min.parent != node transplant(node, node.right_child) and let min be node's right child's parent
+**** transplant(node,min) and let min be node's left child's parent
