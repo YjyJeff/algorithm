@@ -12,11 +12,9 @@ void destroyNode(Node* node){
     return ;
   if(node->left_child_ != nullptr)
     destroyNode(node->left_child_);
-  else
-    if(node->right_child_ != nullptr)
-      destroyNode(node->right_child_);
-    else
-      delete node;
+  if(node->right_child_ != nullptr)
+    destroyNode(node->right_child_);
+  delete node;
   return ;
 }
 
