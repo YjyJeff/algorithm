@@ -9,8 +9,8 @@ using namespace std;
 int main(){
   RedBlackTree* tree = new RedBlackTree();
   srand(time(NULL));
-  for(int i=1;i<=5;i++)
-    tree->treeInsertion(i);
+  for(int i=1;i<=30;i++)
+    tree->treeInsertion(rand()%50+1);
   tree->treeInOrderSearch(tree->root_);
   cout << endl ;
   delete(tree);

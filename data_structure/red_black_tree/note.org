@@ -1,0 +1,20 @@
+* Five properties 
+** BST and node is black or red
+** The root's color is black
+** The leave's color are black (T.NILL   // a sentinel)
+** Red node's children are black
+** For each node, all paths from the node to descendant leaves contain the same number of black nodes
+* RedBlackTree constructor 
+Create NILL firstly than assign root = NILL
+* Left Rotation( Right Rotation symmetry)
+Assume the new root is not T.NILL.(new root = node's right child)
+** link right child's left child to node's right child
+** link node's parent to right child (transplant(node, right child))
+** set node as new root's left child.
+
+* InsertFixUp
+** parent is grandparent's left child
+*** Three cases:
+**** 1. uncle's color is read : change parent's and uncle's color to black, grandparent's color to red
+**** 2. uncle's color is black and node is parent's right child : right rotation(node) , turns it to case 3.(Note: change the node to it's parent, then rotate!!!!!!!!!!!!!!To keep the grandparent unchanged!!!!!!!) 
+**** 3. uncle's color is black and node is parent's left child :  change parent's color to black and grandparent's color to red(to keep property 4). Left rotation(grandparent)
