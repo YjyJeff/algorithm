@@ -1,6 +1,8 @@
 #ifndef __RBTREE_H_INCLUDED_
 #define __RBTREE_H_INCLUDED_
 
+
+
 enum Color {red, black};
 
 struct RedBlackNode{
@@ -28,9 +30,11 @@ public:
   void treeRightRotation(RedBlackNode* node);
   void treeTransplant(RedBlackNode* u, RedBlackNode* v);
   RedBlackNode* treeSearchKey(const int key);
+  void insertFixUp(RedBlackNode* node);
   void treeInsertion(const int key);
   void treeDelete(const int key);
   void treeInOrderSearch(const RedBlackNode* node);
+
   ~RedBlackTree();
 };
 

@@ -22,13 +22,15 @@ void destroyNode(RedBlackTree* tree,RedBlackNode* node){
 }
 
 RedBlackTree::RedBlackTree(){
-  root_ = NILL_;
+  // Create NILL first then assign
   NILL_ = createNode(0);
   NILL_->color_ = black;
+  root_ = NILL_;
 }
 
 RedBlackTree::~RedBlackTree(){
   destroyNode(this,this->root_);
+  delete this->NILL_;
 }
 
 void RedBlackTree::treeLeftRotation( RedBlackNode *node ){
@@ -41,7 +43,7 @@ void RedBlackTree::treeLeftRotation( RedBlackNode *node ){
     new_root->left_child_->parent_ = node;
 
   //link node's parent to new_root
-  RedBlackTree::treeTransplant(node,new_root);
+  this->treeTransplant(node,new_root);
 
   //set node as new_root's left_child
   node->parent_ = new_root;
@@ -55,11 +57,11 @@ void RedBlackTree::treeRightRotation( RedBlackNode *node ){
 
   //link new_root's right_child to node's left_child
   node->left_child_ = new_root->right_child_;
-  if(new_root->left_child_ != this->NILL_)
-    new_root->left_child_->parent_ = node;
+  if(new_root->right_child_ != this->NILL_)
+    new_root->right_child_->parent_ = node;
 
   //link node's parent to new_root
-  RedBlackTree::treeTransplant(node, new_root);
+  this->treeTransplant(node, new_root);
 
   //set node as new_root's right_child
   node->parent_ = new_root;
@@ -95,11 +97,86 @@ RedBlackNode* RedBlackTree::treeSearchKey( const int key ){
 
 void RedBlackTree::treeInOrderSearch( const RedBlackNode *node ){
   if(node->left_child_ != this->NILL_)
-    RedBlackTree::treeInOrderSearch(node->left_child_);
-  cout << node->key_ << " ";
+    this->treeInOrderSearch(node->left_child_);
+  cout << node->key_ << "(" << node->color_ << ") ";
   if(node->right_child_ != this->NILL_)
-    RedBlackTree::treeInOrderSearch(node->right_child_);
+    this->treeInOrderSearch(node->right_child_);
   return ;
 }
 
+void RedBlackTree::treeInsertion( const int key ){
+  RedBlackNode* node = createNode(key);
+  node->parent_ = this->NILL_;
+  node->left_child_ = this->NILL_;
+  node->right_child_ = this->NILL_;
+  //the tree is empty
+  if(this->root_ == this->NILL_)
+    this->root_ = node;
+  else{
+    RedBlackNode* root = this->root_;
+    RedBlackNode* tmp_parent = root;
+    while(root != this->NILL_){
+      tmp_parent = root;
+      if(key > root->key_)
+        root = root->right_child_;
+      else
+        root = root->left_child_;
+    }
+    node->parent_ = tmp_parent;
+    if(key > tmp_parent->key_)
+      tmp_parent->right_child_ = node;
+    else
+      tmp_parent->left_child_ = node;
+  }
+  this->insertFixUp(node);
+  return ;
+}
 
+void RedBlackTree::insertFixUp( RedBlackNode* node ){
+  while(node->parent_->color_ == red){
+    RedBlackNode* grandparent = node->parent_->parent_;
+    //parent is grandparent's left child
+    if(node->parent_ == grandparent->left_child_){
+      RedBlackNode* uncle = grandparent->right_child_;
+      //case 1: uncle's color is red, change color
+      if(uncle->color_ == red){
+        node->parent_->color_ = black;
+        uncle->color_ = black;
+        grandparent->color_ = red;
+        node = grandparent;
+      }
+      else{
+        //case 2: node is parent's right child, left rotation change it to case 3
+        //change the node to it's parent
+        if(node == node->parent_->right_child_){
+          node = node->parent_;
+          this->treeLeftRotation(node);
+        }
+        //case3: node is parent's left child, swap parent's and grandparent's color and right rotation
+        node->parent_->color_ = black;
+        grandparent->color_ = red;
+        this->treeRightRotation(grandparent);
+      }
+    }
+    else{
+      RedBlackNode* uncle = grandparent->left_child_;
+      if(uncle->color_ == red){
+        node->parent_->color_ = black;
+        uncle->color_ = black;
+        grandparent->color_ = red;
+        node = grandparent;
+      }
+      else{
+        if(node == node->parent_->left_child_){
+          node = node->parent_;
+          this->treeRightRotation(node);
+        }
+        node->parent_->color_ = black;
+        grandparent->color_ = red;
+        this->treeLeftRotation(grandparent);
+      }
+    }
+  }
+  this->root_->color_ = black;
+  return ;
+}

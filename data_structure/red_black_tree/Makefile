@@ -1,7 +1,7 @@
 G++ = g++
 FLAGS = -std=c++11 -g -W -I.
 CC = ${G++} ${FLAGS}
-all : main
+read_black_tree : main
 main : RBTree.o main.o
 	$(CC) -o main RBTree.o main.o
 main.o: main.cpp
