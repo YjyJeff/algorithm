@@ -211,8 +211,8 @@ void RedBlackTree::treeDelete( const int key ){
         fix->parent_ = node;          //consider fix equals T.nill
       else{
         this->treeTransplant(min, min->right_child_);
-        min->right_child_->parent_ = min->parent_;
-        min->parent_->left_child_ = min->right_child_;
+        min->right_child_ = node->right_child_;
+        min->right_child_->parent_ = min;
       }
       this->treeTransplant(node, min);
       min->left_child_ = node->left_child_;
@@ -227,7 +227,7 @@ void RedBlackTree::treeDelete( const int key ){
 }
 
 void RedBlackTree::deleteFixUp( RedBlackNode *node ){
-  //if node is red and node = root_, simply change the node's color as black
+  //if node is red or node = root_, simply change the node's color as black
   while(node != this->NILL_ && node->color_ == black){
     // node is parent's left child
     if(node == node->parent_->left_child_){
@@ -282,7 +282,7 @@ void RedBlackTree::deleteFixUp( RedBlackNode *node ){
         //case 3
         if(sibling->left_child_->color_ == black){
           sibling->color_ = red;
-          node->parent_->color_ = black;
+          sibling->right_child_->color_ = black;
           this->treeLeftRotation(sibling);
           sibling = node->parent_->left_child_;
         }
