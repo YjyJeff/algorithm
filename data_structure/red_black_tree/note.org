@@ -16,5 +16,5 @@ Assume the new root is not T.NILL.(new root = node's right child)
 ** parent is grandparent's left child
 *** Three cases:
 **** 1. uncle's color is read : change parent's and uncle's color to black, grandparent's color to red
-**** 2. uncle's color is black and node is parent's right child : right rotation(node) , turns it to case 3.(Note: change the node to it's parent, then rotate!!!!!!!!!!!!!!To keep the grandparent unchanged!!!!!!!) 
+**** 2. uncle's color is black and node is parent's right child : node = node.parent !!!!!!!!!!right rotation(node) , turns it to case 3.(Note: change the node to it's parent, then rotate!!!!!!!!!!!!!!To keep the grandparent unchanged!!!!!!!) 
 **** 3. uncle's color is black and node is parent's left child :  change parent's color to black and grandparent's color to red(to keep property 4). Left rotation(grandparent)

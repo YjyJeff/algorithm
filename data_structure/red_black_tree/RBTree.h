@@ -34,7 +34,8 @@ public:
   void treeInsertion(const int key);
   void treeDelete(const int key);
   void treeInOrderSearch(const RedBlackNode* node);
-
+  RedBlackNode* treeFindMin(RedBlackNode* node);
+  void deleteFixUp(RedBlackNode* node);
   ~RedBlackTree();
 };
 
