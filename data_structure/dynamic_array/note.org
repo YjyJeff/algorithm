@@ -1,0 +1,9 @@
+* Dynamic array
+Store a pointer to a dynamic array, and replace it with a newly allocated array as needed.
+** Operation
+*** Get(i) get the i-th element in an array
+*** Set(i,val) set the i-th element  in array as val
+*** PushBack(val) Add val to end
+*** Remove(i) remove the i-th element
+*** Size() return the size of array
+
