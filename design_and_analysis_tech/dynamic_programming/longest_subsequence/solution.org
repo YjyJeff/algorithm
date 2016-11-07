@@ -4,14 +4,12 @@ Given two sequence A and B find the longest subsequence both A and B have. The s
 Build a 2-D array S[N][M](N and M represent the length of A and B), the element at S[i][j] defines the length of longest subsequence at B[i] to A[j]. The goal is to find 
 the max value in S[i][N];
 ** How to calculate S[i][j]
-if(B[i] == A[j]) S[i][j] == max(S[i-1][j-1]+1, S[i][j-1], S[i-1][j])
-else S[i][j] == max(S[i-1][j-1], S[i][j-1], S[i-1][j])
+if(B[i] == A[j]) S[i][j] == S[i-1][j-1]+1
+else S[i][j] == max(S[i][j-1], S[i-1][j])
 
 ** Explain
-1. S[i-1][j] <= S[i-1][j-1] + 1; when A[j] = B[i-1] we have = . 
-2. S[i][j-1] <= S[i-1][j-1] + 1; when A[j-1] = B[i] we have = .
-3. The original equation is S[i][j] == max(S[i-1][j-1]+1, S[i][j-1](+1), S[i-1][j](+1)). S[a][b](+1)means optional + 1. Because 
-B[i-1] == A[j] or B[i] finds the same before A[j] , we can't take B[i] or A[j] into account again. Simplify the equation we can conclude S[i][j] == max(S[i-1][j-1]+1, S[i][j-1], S[i-1][j]).
+when B[i] == A[j], wen can and should consider the subproblem of finding an LCS of A[j-1] and B[i-1].
+Otherwise, we should consider the two subproblems S[i][j-1] and S[i-1][j].
 
 ** Why no code
 Build this simple array is so easy. 
