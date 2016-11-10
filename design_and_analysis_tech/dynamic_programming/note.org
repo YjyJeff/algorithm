@@ -1,3 +1,20 @@
-* Define State
+* Differ subproblems and choice !!!!
+
+* Optimal substructure
+** 1. Characterize the structure of optimal solution
+Problem exist *optimal substructure* if an optimal solution to the problem contains within it optimal solutions to subproblems.
+In dynamic programming, we build optimal solution to problem from optimal solutions to subproblems.
+*** Common pattern in discovering optimal substructure.
+
+1. A solution to the problem consists of making choice and making this choice leaves one or more subproblems to be solved.
+2. For a given problem, you are given the choice that leads to an optimal solution.
+3. Given this choice, you determine which subproblems ensure and characterize the resulting space of subproblems.
+4. Show that the solution to subproblems must themselves be optimal by using "cut-and-paste" technique.
+*** Characterize space of subproblems
+Keep the space as simple as possible and expand it as necessary.
+
+
+* Define State -- key point !!!!! Memorization, store the solution of the previous sub problem !!!!
 As described above we must first find how to define a "state" which represents a sub-problem and thus we have to find a solution for it. 
 Note that in most cases the states rely on lower states and are independent from greater states.
+
