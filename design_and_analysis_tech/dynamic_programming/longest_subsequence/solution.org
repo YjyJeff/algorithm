@@ -11,8 +11,3 @@ else S[i][j] == max(S[i][j-1], S[i-1][j])
 when B[i] == A[j], wen can and should consider the subproblem of finding an LCS of A[j-1] and B[i-1].
 Otherwise, we should consider the two subproblems S[i][j-1] and S[i-1][j].
 
-** Why no code
-Build this simple array is so easy. 
-   
-
-   
