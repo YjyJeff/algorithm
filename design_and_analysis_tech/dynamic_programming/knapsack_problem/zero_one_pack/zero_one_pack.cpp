@@ -12,8 +12,8 @@ void ZeroOnePack(const int* weight, const int* value, const int number_of_goods,
     sum[i] = new int[total_weight + 1];
 
   // init
-  for(int i=1; i <= number_of_goods; i++)
-    for(int j=1; j <= total_weight; j++)
+  for(int i=0; i <= number_of_goods; i++)
+    for(int j=0; j <= total_weight; j++)
       sum[i][j] = 0;
 
   // complete table
@@ -49,7 +49,6 @@ void ZeroOnePack(int* sum, int weight, int value, int total_weight){
                  sum[i - weight] + value);
 
   return ;
-
 }
 
 int main(){
