@@ -4,7 +4,7 @@ using namespace std;
 int Max(int a, int b){
   return (a > b)? a : b ;
 }
-/*
+
 void ZeroOnePack(const int* weight, const int* value, const int number_of_goods, const int total_weight){
   //malloc memory
   int** sum= new int*[number_of_goods + 1];
@@ -38,10 +38,11 @@ void ZeroOnePack(const int* weight, const int* value, const int number_of_goods,
     delete [] sum[i];
   delete [] sum;
 }
-*/
+
 
 // 1-d array
 //f[w] = max(f[w-1], f[w-w[i]] + v[i])
+/*
 void ZeroOnePack(int* sum, int weight, int value, int total_weight){
   // recursion from the tail to head to forbid fresh the old value
   for (int i = total_weight; i >= weight; i--)
@@ -50,13 +51,14 @@ void ZeroOnePack(int* sum, int weight, int value, int total_weight){
 
   return ;
 }
-
+*/
 int main(){
-  const int total_weight = 50;
-  const int number_of_goods = 3;
-  int weight[number_of_goods] = {10,20,30};
-  int value[number_of_goods] = {60, 100 ,120};
-  //ZeroOnePack(weight, value, number_of_goods, total_weight);
+  const int total_weight = 11;
+  const int number_of_goods = 5;
+  int weight[number_of_goods] = {1,2,5,6,7};
+  int value[number_of_goods] = {1,6,18,22,28};
+  ZeroOnePack(weight, value, number_of_goods, total_weight);
+  /*
   int sum[total_weight+1] = {0};
 
   for(int i = 0; i <= number_of_goods ; i++)
@@ -65,6 +67,6 @@ int main(){
     ZeroOnePack(sum, weight[i-1], value[i-1], total_weight);
 
   cout << sum[total_weight] << endl;
-
+  */
   return 0;
 }
